@@ -63,7 +63,9 @@ fastify.register(fastifyStatic, {
 	decorateReply: false,
 });
 
-fastify.get("/health", async () => ({ status: "ok" }));\n\nfastify.setNotFoundHandler((res, reply) => {
+fastify.get("/health", async () => ({ status: "ok" }));
+
+fastify.setNotFoundHandler((res, reply) => {
 	return reply.code(404).type("text/html").sendFile("404.html");
 });
 
