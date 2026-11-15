@@ -1,0 +1,25 @@
+{$SITE_HOST} {
+  basic_auth {
+    {$LOGIN_USER} {$LOGIN_HASH}
+  }
+  header {
+    X-Content-Type-Options nosniff
+    Referrer-Policy same-origin
+    X-Frame-Options SAMEORIGIN
+    -Server
+  }
+  @browser path /browser /browser/*
+  handle @browser {
+    reverse_proxy browser:3000 {
+      flush_interval -1
+      header_up -Authorization
+    }
+  }
+  handle /healthz {
+    respond "gateway healthy" 200
+  }
+  handle {
+    root * /srv
+    file_server
+  }
+}

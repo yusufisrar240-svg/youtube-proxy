@@ -1,0 +1,63 @@
+name: study-browser
+services:
+  gateway:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment:
+      SITE_HOST: ${SITE_HOST:?Set SITE_HOST}
+      LOGIN_USER: ${LOGIN_USER:?Set LOGIN_USER}
+      LOGIN_HASH: ${LOGIN_HASH:?Set LOGIN_HASH}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./portal:/srv:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks: [front]
+    mem_limit: 256m
+    cpus: 0.25
+    security_opt: ["no-new-privileges:true"]
+  browser:
+    image: ${BROWSER_IMAGE:-lscr.io/linuxserver/chromium:latest}
+    restart: unless-stopped
+    shm_size: "1gb"
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: America/New_York
+      SUBFOLDER: /browser/
+      TITLE: Study Browser
+      CHROME_CLI: "--no-first-run --homepage=http://start/ http://start/"
+      SELKIES_ALLOWED_ORIGINS: https://${SITE_HOST:?Set SITE_HOST}
+      SELKIES_FRAME_ANCESTORS: "'self'"
+      SELKIES_VIDEO_STREAMING_MODE: "true"
+    volumes:
+      - browser_profile:/config
+    networks: [front]
+    mem_limit: 8g
+    cpus: 1.7
+    pids_limit: 1024
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:3000/browser/ >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      start_period: 120s
+      retries: 5
+    logging:
+      driver: json-file
+      options: {max-size: "10m", max-file: "3"}
+  start:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./start:/usr/share/nginx/html:ro
+    networks: [front]
+    mem_limit: 64m
+    security_opt: ["no-new-privileges:true"]
+networks:
+  front:
+    driver: bridge
+volumes:
+  browser_profile:
+  caddy_data:
+  caddy_config:
