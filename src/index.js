@@ -16,7 +16,12 @@ const publicPath = fileURLToPath(new URL("../public/", import.meta.url));
 logging.set_level(logging.NONE);
 Object.assign(wisp.options, {
 	allow_udp_streams: false,
-	hostname_blacklist: [/example\.com/],
+	hostname_blacklist: [],
+	allow_private_ips: false,
+	allow_loopback_ips: false,
+	allow_direct_ip: false,
+	port_whitelist: [80, 443],
+	dns_result_order: "ipv4first",
 	dns_servers: ["1.1.1.3", "1.0.0.3"],
 });
 
@@ -58,7 +63,7 @@ fastify.register(fastifyStatic, {
 	decorateReply: false,
 });
 
-fastify.setNotFoundHandler((res, reply) => {
+fastify.get("/health", async () => ({ status: "ok" }));\n\nfastify.setNotFoundHandler((res, reply) => {
 	return reply.code(404).type("text/html").sendFile("404.html");
 });
 

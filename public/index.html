@@ -1,66 +1,10 @@
 <!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-		/>
-		<title>Scramjet</title>
-
-		<link rel="shortcut icon" content="favicon.webp" />
-	
-		<script src="/scram/scramjet.all.js"></script>
-		<script src="/baremux/index.js"></script>
-		
-		<link rel="stylesheet" href="index.css" />
-		<script src="register-sw.js" defer></script>
-		<script src="search.js" defer></script>
-		<script src="index.js" defer></script>
-	</head>
-
-	<body>
-		<div title="Scramjet Logo" class="flex-center logo-wrapper header-center">
-			<img class="logo" src="sj.png" alt="Scramjet" />
-			<h1>Scramjet | MW</h1>
-		</div>
-		<div class="flex-center desc left-margin">
-			<p>
-				Scramjet is an experimental interception based web proxy designed to
-				evade internet censorship, bypass arbitrary web browser restrictions and
-				innovate web proxy technologies.
-			</p>
-		</div>
-
-		<form id="sj-form" class="flex-center">
-			<input
-				id="sj-search-engine"
-				value="https://www.google.com/search?q=%s"
-				type="hidden"
-			/>
-			<input id="sj-address" type="text" placeholder="Search the web freely" />
-		</form>
-		<div class="desc left-margin">
-			<p id="sj-error"></p>
-			<pre id="sj-error-code"></pre>
-		</div>
-		<footer>
-			<div>
-				<a
-					title="The Mercury Workshop GitHub organization"
-					href="https://github.com/MercuryWorkshop"
-					>Mercury Workshop</a
-				>
-				<a
-					title="The example demo app for Scramjet"
-					href="https://github.com/MercuryWorkshop/Scramjet-Demo"
-					>GitHub</a
-				>
-				<a title="License information" href="credits.html">Credits</a>
-			</div>
-			<div>
-				<span>Scramjet &copy; MW 2025</span>
-			</div>
-		</footer>
-	</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Orbit • Your web, in one place</title><link rel="stylesheet" href="/orbit.css"><script src="/scram/scramjet.all.js"></script><script src="/baremux/index.js"></script><script src="/orbit.js" defer></script></head>
+<body><header><a class="brand" href="/">◉ <span>orbit</span></a><span class="badge">Personal web proxy</span><button id="home" hidden>Home</button><button id="fullscreen" hidden>Fullscreen</button></header>
+<main id="landing"><div class="eyebrow">A LITTLE MORE ROOM TO EXPLORE</div><h1>Your web.<br><span>One simple window.</span></h1><p class="intro">Open a website, find a video, or jump into Shorts.</p>
+<form id="browse"><label for="address">Website or search</label><div class="searchbox"><span aria-hidden="true">↗</span><input id="address" placeholder="Enter a URL or search YouTube" autocomplete="off" autocapitalize="off" spellcheck="false" required><button type="submit">Go <span aria-hidden="true">→</span></button></div></form>
+<div class="shortcuts"><button data-url="https://www.youtube.com/"><span class="tile red">▶</span>YouTube</button><button data-url="https://www.youtube.com/shorts/"><span class="tile pink">ϟ</span>Shorts</button><button data-url="https://www.wikipedia.org/"><span class="tile blue">W</span>Wikipedia</button></div>
+<p id="status" role="status" aria-live="polite">Ready to browse. Playback depends on the destination website.</p>
+<details><summary>When a video won’t play</summary><p>YouTube may reject a proxy server’s IP address or request a sign-in. Retry once; if it still fails, use the original website. Loading a page does not confirm video playback.</p><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Open YouTube directly ↗</a></details>
+</main><section id="viewer" hidden><div class="toolbar"><form id="navigate"><label class="sr-only" for="location">Website address</label><input id="location" aria-label="Website address"><button>Go</button></form><button id="reload">Reload</button><a id="direct" target="_blank" rel="noopener noreferrer">Open original ↗</a></div><div id="framehost"></div><p id="viewer-status" role="status">Opening website…</p></section>
+<footer><span>Powered by Scramjet & Wisp</span><a href="https://github.com/yusufisrar240-svg/youtube-proxy" target="_blank" rel="noopener noreferrer">Source & license ↗</a></footer></body></html>
