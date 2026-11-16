@@ -34,7 +34,7 @@ services:
     volumes:
       - browser_profile:/config
     networks: [front]
-    mem_limit: 8g
+    mem_limit: ${BROWSER_MEMORY_LIMIT:-3g}
     cpus: 1.7
     pids_limit: 1024
     healthcheck:
