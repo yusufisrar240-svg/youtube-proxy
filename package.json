@@ -1,5 +1,5 @@
 {
-  "name": "orbit-personal-proxy",
+  "name": "harbor-personal-proxy",
   "version": "2.0.0",
   "description": "The demo application for Scramjet, a high-performance web proxy.",
   "type": "module",
